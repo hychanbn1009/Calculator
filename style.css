@@ -1,0 +1,32 @@
+.numberContainer {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.resultContainer {
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 1;
+  grid-row-end: 4;
+  background-color: yellow;
+  margin-bottom: 1fr;
+}
+
+.operatorContainer {
+  display: grid;
+  grid-template-columns: 1;
+}
+
+.calculatorContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  height: 30vh;
+  width: 30vw;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+}
