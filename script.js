@@ -12,7 +12,7 @@ const addButton=document.getElementById('addButton').addEventListener('click',()
 const subtractButton=document.getElementById('subtractButton').addEventListener('click',()=>{updateOperator('-')},false)
 const multiplyButton=document.getElementById('multiplyButton').addEventListener('click',()=>{updateOperator('*')},false)
 const divideButton=document.getElementById('divideButton').addEventListener('click',()=>{updateOperator('/')},false)
-const equalButton=document.getElementById('equalButton')
+const equalButton=document.getElementById('equalButton').addEventListener('click',()=>{operate()},false)
 const clear=document.getElementById('clearButton').addEventListener('click',()=>{input('c')},false)
 const firstNumber = document.getElementById('firstNumber')
 const secondNumber = document.getElementById('secondNumber')
@@ -32,32 +32,47 @@ const divide=(number1,number2)=>{
     return number1/number2
 }
 
-const operate=(operator,num1,num2)=>{
-
+const operate=(operator,storeNumber1,storeNumber2)=>{
+    
 }
 
 let storeNumber1=[]
+let storeNumber2=[]
+let passtoNumber2=true
 
 const updateOperator=(operator)=>{
     if (operator==='+'||operator==='-'||operator==='*'||operator==='/'){
         console.log(operator)
+        passtoNumber2=false
         operatorContainer.innerHTML=(operator)
+        return operator
     }
     else{
         return ''
     }
 }
 
-
 const input=(inputNumber)=>{
-    if(inputNumber==='c'){
-        storeNumber1=[]
-        firstNumber.innerHTML=resultInt(storeNumber1)
+    if(passtoNumber2){
+        if(inputNumber==='c'){
+            storeNumber1=[]
+            firstNumber.innerHTML=resultInt(storeNumber1)
+        }else{
+            storeNumber1.push(inputNumber)
+            console.log(storeNumber1)
+            firstNumber.innerHTML=resultInt(storeNumber1)
+        }
     }else{
-        storeNumber1.push(inputNumber)
-        console.log(storeNumber1)
-        firstNumber.innerHTML=resultInt(storeNumber1)
+        if(inputNumber==='c'){
+            storeNumber2=[]
+            secondNumber.innerHTML=resultInt(storeNumber2)
+        }else{
+            storeNumber2.push(inputNumber)
+            console.log(storeNumber2)
+            secondNumber.innerHTML=resultInt(storeNumber2)
+        }
     }
+
 }
 
 const resultInt=(resultNumber)=>{
