@@ -12,6 +12,9 @@
   grid-row-end: 4;
   background-color: yellow;
   margin-bottom: 1fr;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .operatorContainer {
@@ -22,8 +25,8 @@
 .calculatorContainer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  height: 30vh;
-  width: 30vw;
+  height: 60vh;
+  width: 60vw;
 }
 
 body {
