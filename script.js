@@ -19,6 +19,11 @@ const secondNumber = document.getElementById('secondNumber')
 const operatorContainer = document.getElementById('operatorContainer')
 const result = document.getElementById('result')
 
+let storeNumber1=[]
+let storeNumber2=[]
+let finishedNumber1=false
+
+
 const add =(number1,number2)=>{
     return number1+number2
 }
@@ -29,23 +34,43 @@ const multiply=(number1,number2)=>{
     return number1*number2
 }
 const divide=(number1,number2)=>{
-    return number1/number2
+    if(number2!==0){
+        return number1/number2
+    }
+    else{
+        return 'Cannot divide by0'
+    }
 }
 
-const operate=(operator,storeNumber1,storeNumber2)=>{
-    
+const operate=()=>{
+    if(method==='+'){
+        num1=parseInt(resultInt(storeNumber1))
+        num2=parseInt(resultInt(storeNumber2))
+        result.innerHTML=(add(num1,num2))
+    }
+    if(method==='-'){
+        num1=parseInt(resultInt(storeNumber1))
+        num2=parseInt(resultInt(storeNumber2))
+        result.innerHTML=(subtract(num1,num2))
+    }
+    if(method==='*'){
+        num1=parseInt(resultInt(storeNumber1))
+        num2=parseInt(resultInt(storeNumber2))
+        result.innerHTML=(multiply(num1,num2))
+    }
+    if(method==='/'){
+        num1=parseInt(resultInt(storeNumber1))
+        num2=parseInt(resultInt(storeNumber2))
+        result.innerHTML=(divide(num1,num2))
+    }
 }
-
-let storeNumber1=[]
-let storeNumber2=[]
-let passtoNumber2=true
 
 const updateOperator=(operator)=>{
     if (operator==='+'||operator==='-'||operator==='*'||operator==='/'){
         console.log(operator)
-        passtoNumber2=false
+        finishedNumber1=true
         operatorContainer.innerHTML=(operator)
-        return operator
+        return method=operator
     }
     else{
         return ''
@@ -53,29 +78,28 @@ const updateOperator=(operator)=>{
 }
 
 const input=(inputNumber)=>{
-    if(passtoNumber2){
-        if(inputNumber==='c'){
-            storeNumber1=[]
-            firstNumber.innerHTML=resultInt(storeNumber1)
-        }else{
+    if(inputNumber==='c'){
+        storeNumber1=[]
+        storeNumber2=[]
+        finishedNumber1=false
+        firstNumber.innerHTML=resultInt(storeNumber1)
+        secondNumber.innerHTML=resultInt(storeNumber2)
+        operatorContainer.innerHTML=('')
+        result.innerHTML=('')
+    }else{
+        if(finishedNumber1===false){
             storeNumber1.push(inputNumber)
             console.log(storeNumber1)
             firstNumber.innerHTML=resultInt(storeNumber1)
         }
-    }else{
-        if(inputNumber==='c'){
-            storeNumber2=[]
-            secondNumber.innerHTML=resultInt(storeNumber2)
-        }else{
+        else{
             storeNumber2.push(inputNumber)
             console.log(storeNumber2)
             secondNumber.innerHTML=resultInt(storeNumber2)
         }
     }
-
 }
 
 const resultInt=(resultNumber)=>{
     return resultNumber.join('')
 }
-
