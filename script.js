@@ -20,6 +20,7 @@ const secondNumber = document.getElementById('secondNumber')
 const operatorContainer = document.getElementById('operatorContainer')
 const result = document.getElementById('result')
 const decimalPointButton = document.getElementById('decimalPointButton').addEventListener('click',()=>{input('.')},false)
+const deleteButton=document.getElementById('delete').addEventListener('click',()=>{input('del')},false)
 
 // store the number variable as list and check if the number1 finished or not
 let storeNumber1=[]
@@ -95,6 +96,23 @@ const input=(inputNumber)=>{
         secondNumber.innerHTML=resultInt(storeNumber2)
         operatorContainer.innerHTML=('')
         result.innerHTML=('')
+        console.log('clear is working')
+    }
+    if(inputNumber==='del'){
+        if(finishedNumber1===false){
+            storeNumber1.pop()
+            console.log(storeNumber1)
+            firstNumber.innerHTML=resultInt(storeNumber1)
+            isdecimalpoint=false;
+            console.log('num1 decimal is working')
+        }
+        else{
+            storeNumber2.pop()
+            console.log(storeNumber2)
+            isdecimalpoint=false;
+            secondNumber.innerHTML=resultInt(storeNumber2)
+            console.log('num2 decimal is working')
+        }
     }
 //if user input clear, then clear all the data & variable
     if(inputNumber==='.'){
@@ -103,11 +121,13 @@ const input=(inputNumber)=>{
                     storeNumber1.push(inputNumber)
                     console.log(storeNumber1)
                     firstNumber.innerHTML=resultInt(storeNumber1)
+                    console.log('num1 decimal is working')
                 }
             else{
                 storeNumber2.push(inputNumber)
                 console.log(storeNumber2)
                 secondNumber.innerHTML=resultInt(storeNumber2)
+                console.log('num2 decimal is working')
             }
         }
         isdecimalpoint=true
@@ -115,15 +135,17 @@ const input=(inputNumber)=>{
 /* if user input '.',will check they input the '.' before, if they did not input '.' before, push the '.' into array
 and return the checking variable to true. if the checking variable is true, system will not take '.' into array */
     else{
-        if(finishedNumber1===false){
+        if(finishedNumber1===false&&inputNumber!=='c'&&inputNumber!=='del'){
                 storeNumber1.push(inputNumber)
                 console.log(storeNumber1)
                 firstNumber.innerHTML=resultInt(storeNumber1)
+                console.log('num1 is working')
             }
-        else{
+        if(finishedNumber1===true&&inputNumber!=='c'&&inputNumber!=='del'){
             storeNumber2.push(inputNumber)
             console.log(storeNumber2)
             secondNumber.innerHTML=resultInt(storeNumber2)
+            console.log('num2 is working')
         }
     }
 }
