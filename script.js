@@ -13,7 +13,7 @@ const addButton=document.getElementById('addButton').addEventListener('click',()
 const subtractButton=document.getElementById('subtractButton').addEventListener('click',()=>{updateOperator('-')},false)
 const multiplyButton=document.getElementById('multiplyButton').addEventListener('click',()=>{updateOperator('*')},false)
 const divideButton=document.getElementById('divideButton').addEventListener('click',()=>{updateOperator('/')},false)
-const equalButton=document.getElementById('equalButton').addEventListener('click',()=>{operate()},false)
+const equalButton=document.getElementById('equalButton').addEventListener('click',()=>{input('=')},false)
 const clear=document.getElementById('clearButton').addEventListener('click',()=>{input('c')},false)
 const firstNumber = document.getElementById('firstNumber')
 const secondNumber = document.getElementById('secondNumber')
@@ -98,6 +98,9 @@ const input=(inputNumber)=>{
         result.innerHTML=('')
         console.log('clear is working')
     }
+    if(inputNumber==='='){
+        operate()
+    }
     if(inputNumber==='del'){
         if(finishedNumber1===false){
             storeNumber1.pop()
@@ -135,13 +138,13 @@ const input=(inputNumber)=>{
 /* if user input '.',will check they input the '.' before, if they did not input '.' before, push the '.' into array
 and return the checking variable to true. if the checking variable is true, system will not take '.' into array */
     else{
-        if(finishedNumber1===false&&inputNumber!=='c'&&inputNumber!=='del'){
+        if(finishedNumber1===false&&inputNumber!=='c'&&inputNumber!=='del'&&inputNumber!=='='){
                 storeNumber1.push(inputNumber)
                 console.log(storeNumber1)
                 firstNumber.innerHTML=resultInt(storeNumber1)
                 console.log('num1 is working')
             }
-        if(finishedNumber1===true&&inputNumber!=='c'&&inputNumber!=='del'){
+        if(finishedNumber1===true&&inputNumber!=='c'&&inputNumber!=='del'&&inputNumber!=='='){
             storeNumber2.push(inputNumber)
             console.log(storeNumber2)
             secondNumber.innerHTML=resultInt(storeNumber2)
