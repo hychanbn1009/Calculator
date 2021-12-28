@@ -11,8 +11,8 @@ const nine=document.getElementById('nine').addEventListener('click',()=>{input(9
 const zero=document.getElementById('zero').addEventListener('click',()=>{input(0)},false)
 const addButton=document.getElementById('addButton').addEventListener('click',()=>{updateOperator('+')},false)
 const subtractButton=document.getElementById('subtractButton').addEventListener('click',()=>{updateOperator('-')},false)
-const multiplyButton=document.getElementById('multiplyButton').addEventListener('click',()=>{updateOperator('*')},false)
-const divideButton=document.getElementById('divideButton').addEventListener('click',()=>{updateOperator('/')},false)
+const multiplyButton=document.getElementById('multiplyButton').addEventListener('click',()=>{updateOperator('×')},false)
+const divideButton=document.getElementById('divideButton').addEventListener('click',()=>{updateOperator('÷')},false)
 const equalButton=document.getElementById('equalButton').addEventListener('click',()=>{input('=')},false)
 const clear=document.getElementById('clearButton').addEventListener('click',()=>{input('c')},false)
 const firstNumber = document.getElementById('firstNumber')
@@ -59,12 +59,12 @@ const operate=()=>{
         num2=parseFloat(resultInt(storeNumber2))
         result.innerHTML=(subtract(num1,num2))
     }
-    if(method==='*'){
+    if(method==='×'){
         num1=parseFloat(resultInt(storeNumber1))
         num2=parseFloat(resultInt(storeNumber2))
         result.innerHTML=(multiply(num1,num2))
     }
-    if(method==='/'){
+    if(method==='÷'){
         num1=parseFloat(resultInt(storeNumber1))
         num2=parseFloat(resultInt(storeNumber2))
         result.innerHTML=(divide(num1,num2))
@@ -73,12 +73,14 @@ const operate=()=>{
 
 // if the operator button pressed, this function will update the operator
 const updateOperator=(operator)=>{
-    if (operator==='+'||operator==='-'||operator==='*'||operator==='/'){
-        console.log(operator)
-        finishedNumber1=true
-        isdecimalpoint=false;
-        operatorContainer.innerHTML=(operator)
-        return method=operator
+    if (operator==='+'||operator==='-'||operator==='×'||operator==='÷'){
+        if(result.value===undefined){
+            console.log(operator)
+            finishedNumber1=true
+            isdecimalpoint=false;
+            operatorContainer.innerHTML=(operator)
+            return method=operator
+        }
     }
     else{
         return ''
@@ -98,8 +100,15 @@ const input=(inputNumber)=>{
         result.innerHTML=('')
         console.log('clear is working')
     }
+    //checking second number exist or not to prevent error
     if(inputNumber==='='){
-        operate()
+        if(storeNumber2.length>0){
+            console.log('operate!')
+            operate()
+        }
+        else{
+            return ''
+        }
     }
     if(inputNumber==='del'){
         if(finishedNumber1===false){

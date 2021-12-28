@@ -1,37 +1,35 @@
 .numberContainer {
-  grid-column-start: 1;
-  grid-column-end: 4;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
 }
 
-.resultContainer {
+.btn-group {
+  grid-column: span 2;
+}
+
+.dispalyContainer {
+  height: 100%;
+  width: 100%;
   grid-column-start: 1;
   grid-column-end: 5;
   grid-row-start: 1;
-  grid-row-end: 4;
+  grid-row-end: 2;
   background-color: yellow;
   margin-bottom: 1px;
   display: inline-block;
-  border-style: solid;
   border-width: 2px;
-}
-
-.operatorContainer {
-  display: grid;
-  grid-template-columns: 1;
+  border: 2px solid;
+  border-radius: 25px;
 }
 
 .calculatorContainer {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  height: 60vh;
-  width: 60vw;
-}
-
-body {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  height: 40vh;
+  width: 40vw;
+  border: 2px solid;
+  border-radius: 25px;
+  padding: 2rem;
 }
 
 button {
@@ -57,6 +55,22 @@ button:active {
   transform: translateY(4px);
 }
 
-p {
+body {
+  padding-top: 5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.formulaContainer {
+  display: inline-block;
   font-size: x-large;
+}
+
+.dispalyContainer {
+  padding-top: 2rem;
+}
+
+.resultContainer {
+  text-align: right;
+  font-size: xx-large;
 }
