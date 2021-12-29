@@ -28,6 +28,61 @@ let storeNumber2=[]
 let finishedNumber1=false
 let isdecimalpoint=false
 
+//add window onkeypress event listener method
+window.onkeydown = function(event) {
+    console.log(event.key)
+    switch(event.key){
+        case '1':
+            input('1')
+            break
+        case '2':
+            input('2')
+            break
+        case '3':
+            input('3')
+            break
+        case '4':
+            input('5')
+            break
+        case '6':
+            input('6')
+            break
+        case '7':
+            input('7')
+            break
+        case '8':
+            input('8')
+            break
+        case '9':
+            input('9')
+            break
+        case '0':
+            input('0')
+            break
+        case '+':
+            updateOperator('+')
+            break
+        case '-':
+            updateOperator('-')
+            break
+        case '*':
+            updateOperator('×')
+            break
+        case '/':
+            updateOperator('÷')
+            break
+        case 'Enter':
+            input('=')
+            break
+        case 'Delete':
+            input('del')
+            break
+        case 'Backspace':
+            input('del')
+            break
+    }
+};
+
 //basic calculate function
 const add =(number1,number2)=>{
     return number1+number2
@@ -52,7 +107,7 @@ const operate=()=>{
     if(method==='+'){
         num1=parseFloat(resultInt(storeNumber1))
         num2=parseFloat(resultInt(storeNumber2))
-        result.innerHTML=(add(num1,num2))
+        result.innerHTML=(Math.round(add(num1,num2)*100000)/100000)
     }
     if(method==='-'){
         num1=parseFloat(resultInt(storeNumber1))
