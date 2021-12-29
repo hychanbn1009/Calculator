@@ -30,7 +30,6 @@ let isdecimalpoint=false
 
 //add window onkeypress event listener method
 window.onkeydown = function(event) {
-    console.log(event.key)
     switch(event.key){
         case '1':
             input('1')
@@ -42,6 +41,9 @@ window.onkeydown = function(event) {
             input('3')
             break
         case '4':
+            input('4')
+            break
+        case '5':
             input('5')
             break
         case '6':
@@ -112,27 +114,37 @@ const operate=()=>{
     if(method==='-'){
         num1=parseFloat(resultInt(storeNumber1))
         num2=parseFloat(resultInt(storeNumber2))
-        result.innerHTML=(subtract(num1,num2))
+        result.innerHTML=(Math.round(subtract(num1,num2)*100000)/100000)
     }
     if(method==='×'){
         num1=parseFloat(resultInt(storeNumber1))
         num2=parseFloat(resultInt(storeNumber2))
-        result.innerHTML=(multiply(num1,num2))
+        result.innerHTML=(Math.round(multiply(num1,num2)*100000)/100000)
     }
     if(method==='÷'){
         num1=parseFloat(resultInt(storeNumber1))
         num2=parseFloat(resultInt(storeNumber2))
-        result.innerHTML=(divide(num1,num2))
+        result.innerHTML=(Math.round(divide(num1,num2)*100000)/100000)
     }
 }
 
 // if the operator button pressed, this function will update the operator
 const updateOperator=(operator)=>{
     if (operator==='+'||operator==='-'||operator==='×'||operator==='÷'){
-        if(result.value===undefined){
-            console.log(operator)
+        if(result.innerText===''){
             finishedNumber1=true
             isdecimalpoint=false;
+            operatorContainer.innerHTML=(operator)
+            return method=operator
+        }
+        else{
+            firstNumber.innerHTML=result.innerHTML
+            storeNumber1=result.innerHTML.split('')
+            finishedNumber1=true
+            isdecimalpoint=false;
+            result.innerHTML=''
+            secondNumber.innerHTML=''
+            storeNumber2=[]
             operatorContainer.innerHTML=(operator)
             return method=operator
         }
@@ -153,12 +165,10 @@ const input=(inputNumber)=>{
         secondNumber.innerHTML=resultInt(storeNumber2)
         operatorContainer.innerHTML=('')
         result.innerHTML=('')
-        console.log('clear is working')
     }
     //checking second number exist or not to prevent error
     if(inputNumber==='='){
         if(storeNumber2.length>0){
-            console.log('operate!')
             operate()
         }
         else{
@@ -168,17 +178,13 @@ const input=(inputNumber)=>{
     if(inputNumber==='del'){
         if(finishedNumber1===false){
             storeNumber1.pop()
-            console.log(storeNumber1)
             firstNumber.innerHTML=resultInt(storeNumber1)
             isdecimalpoint=false;
-            console.log('num1 decimal is working')
         }
         else{
             storeNumber2.pop()
-            console.log(storeNumber2)
             isdecimalpoint=false;
             secondNumber.innerHTML=resultInt(storeNumber2)
-            console.log('num2 decimal is working')
         }
     }
 //if user input clear, then clear all the data & variable
@@ -186,15 +192,11 @@ const input=(inputNumber)=>{
         if(isdecimalpoint===false){
             if(finishedNumber1===false){
                     storeNumber1.push(inputNumber)
-                    console.log(storeNumber1)
                     firstNumber.innerHTML=resultInt(storeNumber1)
-                    console.log('num1 decimal is working')
                 }
             else{
                 storeNumber2.push(inputNumber)
-                console.log(storeNumber2)
                 secondNumber.innerHTML=resultInt(storeNumber2)
-                console.log('num2 decimal is working')
             }
         }
         isdecimalpoint=true
@@ -202,17 +204,23 @@ const input=(inputNumber)=>{
 /* if user input '.',will check they input the '.' before, if they did not input '.' before, push the '.' into array
 and return the checking variable to true. if the checking variable is true, system will not take '.' into array */
     else{
-        if(finishedNumber1===false&&inputNumber!=='c'&&inputNumber!=='del'&&inputNumber!=='='){
-                storeNumber1.push(inputNumber)
-                console.log(storeNumber1)
-                firstNumber.innerHTML=resultInt(storeNumber1)
-                console.log('num1 is working')
+        if(finishedNumber1===false&&inputNumber!=='c'&&inputNumber!=='del'&&inputNumber!=='='&&storeNumber1.length<9){
+            storeNumber1.push(inputNumber)
+            firstNumber.innerHTML=resultInt(storeNumber1)
             }
-        if(finishedNumber1===true&&inputNumber!=='c'&&inputNumber!=='del'&&inputNumber!=='='){
+        if(finishedNumber1===true&&inputNumber!=='c'&&inputNumber!=='del'&&inputNumber!=='='&&storeNumber2.length<9){
             storeNumber2.push(inputNumber)
-            console.log(storeNumber2)
             secondNumber.innerHTML=resultInt(storeNumber2)
-            console.log('num2 is working')
+        }
+        if(result.innerText!==''&&inputNumber!=='c'&&inputNumber!=='del'&&inputNumber!=='='){
+            storeNumber1=[]
+            finishedNumber1=false
+            result.innerHTML=''
+            secondNumber.innerHTML=''
+            storeNumber2=[]
+            operatorContainer.innerHTML=('')
+            storeNumber1.push(inputNumber)
+            firstNumber.innerHTML=resultInt(storeNumber1)
         }
     }
 }
